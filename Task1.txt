@@ -1,0 +1,91 @@
+oleg@oleg-MS-7A34:~$ docker pull busybox:latest
+latest: Pulling from library/busybox
+92f8b3f0730f: Pull complete 
+Digest: sha256:b5fc1d7b2e4ea86a06b0cf88de915a2c43a99a00b6b3c0af731e5f4c07ae8eff
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+
+
+oleg@oleg-MS-7A34:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
+busybox      latest    d3cd072556c2   9 days ago   1.24MB
+
+
+docker run --name pinger busybox ping netology.ru
+PING netology.ru (172.67.43.83): 56 data bytes
+64 bytes from 172.67.43.83: seq=0 ttl=57 time=22.038 ms
+64 bytes from 172.67.43.83: seq=1 ttl=57 time=21.837 ms
+64 bytes from 172.67.43.83: seq=2 ttl=57 time=263.058 ms
+64 bytes from 172.67.43.83: seq=3 ttl=57 time=21.921 ms
+64 bytes from 172.67.43.83: seq=4 ttl=57 time=21.659 ms
+64 bytes from 172.67.43.83: seq=5 ttl=57 time=21.974 ms
+64 bytes from 172.67.43.83: seq=6 ttl=57 time=21.987 ms
+^C
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 21.659/56.353/263.058 ms
+
+
+oleg@oleg-MS-7A34:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS                      PORTS     NAMES
+527ad3f08034   busybox   "ping netology.ru"   18 seconds ago   Exited (0) 11 seconds ago             pinger
+
+
+oleg@oleg-MS-7A34:~$ docker logs pinger
+PING netology.ru (172.67.43.83): 56 data bytes
+64 bytes from 172.67.43.83: seq=0 ttl=57 time=22.038 ms
+64 bytes from 172.67.43.83: seq=1 ttl=57 time=21.837 ms
+64 bytes from 172.67.43.83: seq=2 ttl=57 time=263.058 ms
+64 bytes from 172.67.43.83: seq=3 ttl=57 time=21.921 ms
+64 bytes from 172.67.43.83: seq=4 ttl=57 time=21.659 ms
+64 bytes from 172.67.43.83: seq=5 ttl=57 time=21.974 ms
+64 bytes from 172.67.43.83: seq=6 ttl=57 time=21.987 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 21.659/56.353/263.058 ms
+
+
+oleg@oleg-MS-7A34:~$ docker start pinger
+pinger
+
+
+oleg@oleg-MS-7A34:~$ docker logs pinger
+PING netology.ru (172.67.43.83): 56 data bytes
+64 bytes from 172.67.43.83: seq=0 ttl=57 time=22.038 ms
+64 bytes from 172.67.43.83: seq=1 ttl=57 time=21.837 ms
+64 bytes from 172.67.43.83: seq=2 ttl=57 time=263.058 ms
+64 bytes from 172.67.43.83: seq=3 ttl=57 time=21.921 ms
+64 bytes from 172.67.43.83: seq=4 ttl=57 time=21.659 ms
+64 bytes from 172.67.43.83: seq=5 ttl=57 time=21.974 ms
+64 bytes from 172.67.43.83: seq=6 ttl=57 time=21.987 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 21.659/56.353/263.058 ms
+PING netology.ru (104.22.48.171): 56 data bytes
+64 bytes from 104.22.48.171: seq=0 ttl=57 time=21.931 ms
+64 bytes from 104.22.48.171: seq=1 ttl=57 time=21.620 ms
+64 bytes from 104.22.48.171: seq=2 ttl=57 time=21.750 ms
+64 bytes from 104.22.48.171: seq=3 ttl=57 time=21.636 ms
+
+
+Всего 7 + 4 = 11 пингов
+
+
+oleg@oleg-MS-7A34:~$ docker stop pinger
+pinger
+
+
+oleg@oleg-MS-7A34:~$ docker rm pinger
+pinger
+
+
+oleg@oleg-MS-7A34:~$ docker rmi busybox
+Untagged: busybox:latest
+Untagged: busybox@sha256:b5fc1d7b2e4ea86a06b0cf88de915a2c43a99a00b6b3c0af731e5f4c07ae8eff
+Deleted: sha256:d3cd072556c21c1f1940bd536675b97d7d419a2287d6bb3bd5044ea7466db788
+Deleted: sha256:d0d0905d7be4eff6a63efe4a38647a679de1e024101f67db4fe4b5736c1e7f48
+oleg@oleg-MS-7A34:~$ 
+
+
